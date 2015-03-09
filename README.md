@@ -44,6 +44,21 @@ All changes (`insert`, `update` or `delete`) to a yact monitored table are store
 | where | **Where** was the change performed from. *Not yet implemented.* | 
 | why | **Why** was this change performed.  *Not yet implemented.* |
 
+*** Who are you
 
+Identity is hard, queue [Keith Moon](http://en.wikipedia.org/wiki/Keith_Moon)'s [drum roll](https://www.youtube.com/watch?v=PdLIerfXuZ4). *yact* uses the [system_user]() for the default  *who** value.  This is appopriate for client/server (2 tier) systems; where each user logs into the database.  
+
+But, for most 3 tier systems the server has its own account for the database. In this scenario the *who* must be supplied by the trigger.  Many 3 tier system add a *modifiedBy* column to each table.  In this case the trigger can be changed to use this column
+
+```sql
+insert into audit (table_name, who, old_content, new_content) 
+  select 
+    @table_name,
+    IsNull(i.modifiedBy, d.ModifiedBy),
+    case when d.table_id is null then null else (select d.* for xml raw) end,
+    case when i.table_id is null then null else (select i.* for xml raw) end
+  from inserted as i
+    full outer join deleted as d on i.table_id = d.table_id
+```
 
 
