@@ -65,7 +65,7 @@ insert into audit (table_name, who, old_content, new_content)
 
 *yact* defaults *when* to [sysdatetimeoffset](https://msdn.microsoft.com/en-us/library/bb677334.aspx), which includes the time zone offset of the SQL server.  This *works* if all users are in the same time zone.  If the software system has the user's time, then this value should be used in trigger's `insert`.
 
-By using the time zone offset, its possible to determine if the user accessed the system after hours.
+By using the time zone offset, its possible to determine if the user accessed the system after working hours.
 
 However, its not possible to determine if the user accessed the system during a public holiday.
 
