@@ -24,7 +24,7 @@ All you need to change is
 * declare\set `@table_name`
 * change `table_id` to the name of table's primary key.
 
-## Caveat Emptor
+### Caveat Emptor
 
 Triggers that insert (as yact does) change the `@@identity` value.  All stored procedures should at least use `scope_identity()` instead of `@@identity`; see [how not to retrieve identity value](http://www.sqlbadpractices.com/how-not-to-retrieve-identity-value/) for more issues.
 
@@ -34,21 +34,21 @@ All changes (`insert`, `update` or `delete`) to a yact monitored table are store
 
 | Column | Description |
 | ------ | ----------- |
-| audit_id | A unique key for this audit entry.  Keeps an [ORM](http://en.wikipedia.org/wiki/Object-relational_mapping) happy |
-| operation | Teh SQL operation (`insert`, `update` or `delete`) performed on the *table_name* |
-| table_name | **What** information was changed | 
-| old_content | **What** was the old information | 
-| new_content | **What** is the new information | 
+| audit_id | A unique key for this audit entry.  Keeps an [ORM](http://en.wikipedia.org/wiki/Object-relational_mapping) happy. |
+| operation | The SQL operation (`insert`, `update` or `delete`) performed on the *table_name*. |
+| table_name | **What** information was changed. | 
+| old_content | **What** was the old information. | 
+| new_content | **What** is the new information. | 
 | who | **Who** changed this information | 
-| when | **When** the information changed |  
+| when | **When** was the information changed |  
 | where | **Where** was the change performed from. *Not yet implemented.* | 
 | why | **Why** was this change performed.  *Not yet implemented.* |
 
 ### Who are you
 
-Identity is hard, queue [Keith Moon](http://en.wikipedia.org/wiki/Keith_Moon)'s [drum roll](https://www.youtube.com/watch?v=PdLIerfXuZ4). *yact* uses the [system_user]() for the default  *who** value.  This is appopriate for client/server (2 tier) systems; where each user logs into the database.  
+Identity is hard, queue [Keith Moon](http://en.wikipedia.org/wiki/Keith_Moon)'s [drum roll](https://www.youtube.com/watch?v=PdLIerfXuZ4). *yact* uses the [system_user](https://msdn.microsoft.com/en-us/library/ms179930.aspx) for the default *who* value.  This is appopriate for client/server (2-tier) systems; where each user logs into the database.  
 
-But, for most 3 tier systems the server has its own account for the database. In this scenario the *who* must be supplied by the trigger.  Many 3 tier system add a *modifiedBy* column to each table.  In this case the trigger can be changed to use this column
+But, for most 3-tier systems the server has its own account for the database. In this scenario the *who* must be supplied by the trigger.  Many 3-tier systems have a *modifiedBy* column in each table.  In this case the trigger can be changed to use this column
 
 ```sql
 insert into audit (table_name, who, old_content, new_content) 
@@ -61,4 +61,10 @@ insert into audit (table_name, who, old_content, new_content)
     full outer join deleted as d on i.table_id = d.table_id
 ```
 
+### Time is relative
 
+*yact* defaults *when* to [sysdatetimeoffset](https://msdn.microsoft.com/en-us/library/bb677334.aspx), which includes time zone offset of the SQL server.  This is *works* if all users are in the same time zone.  If the software system has the user's time, then this value should be used in trigger's `insert`.
+
+By using the time zone offset, its possible to determine if the user accessed the after hours.
+
+However, its not possible to determine if the user accessed the system during a public holiday.  
