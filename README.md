@@ -46,9 +46,9 @@ All changes (`insert`, `update` or `delete`) to a yact monitored table are store
 
 ### Who are you
 
-Identity is hard, queue [Keith Moon](http://en.wikipedia.org/wiki/Keith_Moon)'s [drum roll](https://www.youtube.com/watch?v=PdLIerfXuZ4). *yact* uses the [system_user](https://msdn.microsoft.com/en-us/library/ms179930.aspx) for the default *who* value.  This is appopriate for client/server (2-tier) systems; where each user logs into the database.  
+Identity is hard, queue [Keith Moon](http://en.wikipedia.org/wiki/Keith_Moon)'s [drum roll](https://www.youtube.com/watch?v=PdLIerfXuZ4). *yact* uses the [system_user](https://msdn.microsoft.com/en-us/library/ms179930.aspx) for the default *who* value.  This is appopriate for client/server (2-tier) systems; where each user logs into the database.  But, for most 3-tier systems, the server has its own account for the database. In this scenario the *who* must be supplied by the trigger.  
 
-But, for most 3-tier systems the server has its own account for the database. In this scenario the *who* must be supplied by the trigger.  Many 3-tier systems have a *modifiedBy* column in each table.  In this case the trigger can be changed to use this column
+Many 3-tier systems have a *modifiedBy* column in each table.  In this case the trigger can be changed to use this column
 
 ```sql
 insert into audit (table_name, who, old_content, new_content) 
@@ -63,8 +63,9 @@ insert into audit (table_name, who, old_content, new_content)
 
 ### Time is relative
 
-*yact* defaults *when* to [sysdatetimeoffset](https://msdn.microsoft.com/en-us/library/bb677334.aspx), which includes time zone offset of the SQL server.  This is *works* if all users are in the same time zone.  If the software system has the user's time, then this value should be used in trigger's `insert`.
+*yact* defaults *when* to [sysdatetimeoffset](https://msdn.microsoft.com/en-us/library/bb677334.aspx), which includes the time zone offset of the SQL server.  This *works* if all users are in the same time zone.  If the software system has the user's time, then this value should be used in trigger's `insert`.
 
-By using the time zone offset, its possible to determine if the user accessed the after hours.
+By using the time zone offset, its possible to determine if the user accessed the system after hours.
 
-However, its not possible to determine if the user accessed the system during a public holiday.  
+However, its not possible to determine if the user accessed the system during a public holiday.
+
