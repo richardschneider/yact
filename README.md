@@ -44,7 +44,7 @@ All changes (`insert`, `update` or `delete`) to a yact monitored table are store
 | where | **Where** was the change performed from. *Not yet implemented.* | 
 | why | **Why** was this change performed.  *Not yet implemented.* |
 
-*** Who are you
+### Who are you
 
 Identity is hard, queue [Keith Moon](http://en.wikipedia.org/wiki/Keith_Moon)'s [drum roll](https://www.youtube.com/watch?v=PdLIerfXuZ4). *yact* uses the [system_user]() for the default  *who** value.  This is appopriate for client/server (2 tier) systems; where each user logs into the database.  
 
