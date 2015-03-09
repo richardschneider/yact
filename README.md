@@ -24,7 +24,7 @@ The `inserted` and `deleted` tables are supplied by the SQL server when the trig
 
 ## Caveat Emptor
 
-Triggers that insert (as yact does) change the `@@identity` value.  All stored procedures should use ``scope_identity())`` instead of `@@identity`; see [how not to retrieve identity value](http://www.sqlbadpractices.com/how-not-to-retrieve-identity-value/) for more details.
+Triggers that insert (as yact does) change the `@@identity` value.  All stored procedures should at least use `scope_identity()` instead of `@@identity`; see [how not to retrieve identity value](http://www.sqlbadpractices.com/how-not-to-retrieve-identity-value/) for more issues.
 
 
 
