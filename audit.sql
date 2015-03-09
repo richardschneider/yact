@@ -1,6 +1,6 @@
 create table audit
 (
-	audit_id int identity(1,1) not null primary key, 
+    audit_id int identity(1,1) not null primary key, 
     [operation] char not null, 
     table_name varchar(128) not null, 
     old_content xml null, 
