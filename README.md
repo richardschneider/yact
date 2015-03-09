@@ -39,10 +39,10 @@ All changes (`insert`, `update` or `delete`) to a yact monitored table are store
 | table_name | **What** information was changed | 
 | old_content | **What** was the old information | 
 | new_content | **What** is the new information | 
-| who | **Who* changed this information | 
+| who | **Who** changed this information | 
 | when | **When** the information changed |  
-| where | **Where** was *who when the change occur. *Not yet implemented* | 
-| why | **Why** was this change performed.  *Not yet implemented* |
+| where | **Where** was the change performed from. *Not yet implemented.* | 
+| why | **Why** was this change performed.  *Not yet implemented.* |
 
 
 
