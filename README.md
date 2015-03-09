@@ -20,6 +20,11 @@ All you need to change is
 * declare\set `@table_name`
 * change `table_id` to the name of table's primary key.
 
+The `inserted` and `deleted` tables are supplied by the SQL server when the trigger is invoked.  Each table has the same columns as `table_name`.
+
+## Caveat Emptor
+
+Triggers that insert (as yact does) change the `@@identity` value.  All stored procedures should use ``scope_identity())`` instead of `@@identity`; see [how not to retrieve identity value](http://www.sqlbadpractices.com/how-not-to-retrieve-identity-value/) for more details.
 
 
 
