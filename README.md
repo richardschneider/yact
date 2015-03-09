@@ -34,8 +34,15 @@ All changes (`insert`, `update` or `delete`) to a yact monitored table are store
 
 | Column | Description |
 | ------ | ----------- |
-| audit_id | A unique key for this audit entry.  Keeps an ORM happy. |
-
+| audit_id | A unique key for this audit entry.  Keeps an ORM happy.|
+| table_name | **What** information was changed | 
+| old_content | **What** was the old information | 
+| new_content | **What** is the new information | 
+| who | **Who* changed this information | 
+| when | **When** the information changed |  
+| where | **Where** was *user* who changed the information. *Not yet implement**€€€ | 
+| why | **Why** was this change performed.  **Not yet implemented** |
+| operation | `insert`, `update` or `delete` |
 
 
 
