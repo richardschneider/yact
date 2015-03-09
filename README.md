@@ -8,17 +8,17 @@ yact's twist is to store the before and after images of the change as XML conten
 
 Here's the magic in the trigger
 ```sql
-insert into audit
-  (table_name, old_content, new_content) 
+insert into audit (table_name, old_content, new_content) 
   select 
-    @operation,
     @table_name,
     case when d.table_id is null then null else (select d.* for xml raw) end,
     case when i.table_id is null then null else (select i.* for xml raw) end
   from inserted as i
     full outer join deleted as d on i.table_id = d.table_id
 ```
-All you need to change is to declare\set `@table_name` and change `table_id` to the name of table's primary key.
+All you need to change is 
+* declare\set `@table_name`
+* change `table_id` to the name of table's primary key.
 
 
 
