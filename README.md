@@ -6,7 +6,8 @@ Microsoft's SQL Server has an out of the box solution called Change Data Capture
 
 yact's twist is to store the before and after images of the change as XML content as opposed to most other implementations that add a row for each field that was changed.  I believe this gives a light weight and flexible (read efficient) to change tracking.
 
-Here's the magic in the trigger
+## The trigger
+The magic in the [trigger]() is to join the `inserted` and `deleted` delete tables and then convert the rows to XML.
 ```sql
 insert into audit (table_name, old_content, new_content) 
   select 
