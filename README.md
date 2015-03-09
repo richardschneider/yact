@@ -2,7 +2,7 @@
 
 Yet another change tracker.  Most software systems require a `Change Tracker` component for the auditors.  This component should record the 5Ws (who, when, where, why and what) of any database change.
 
-Microsoft's SQL Server has an out of the box solution called [Change Data Capture](https://msdn.microsoft.com/en-us/library/cc645937.aspx), which is great.  However, you need an Enterprise license to enable this feature and its very expensive;  at least for us startups and open sorcerers. *yact* implements poor man's change tracking by using [SQL triggers](http://en.wikipedia.org/wiki/Database_trigger) to insert an [Audit](audit.sql) row.  
+Microsoft's SQL Server has an out of the box solution called [Change Data Capture](https://msdn.microsoft.com/en-us/library/cc645937.aspx), which is great.  However, you need an Enterprise license to enable this feature and its very expensive;  at least for us startups and open sorcerers. *yact* implements poor man's change tracking by using [SQL triggers](http://en.wikipedia.org/wiki/Database_trigger) to insert an [audit](audit.sql) row.  
 
 yact's twist is to store the before and after images of the change as XML content as opposed to most other implementations that add a row for each field that was changed.  I believe this gives a light weight and flexible (read efficient) to change tracking.
 
