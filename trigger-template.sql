@@ -21,11 +21,11 @@ begin
 		select @operation = 'D'
 
   insert into audit (operation, table_name, old_content, new_content) 
-	select
-    @operation,
-    '{table}',
-		case when d.{table_id} is null then null else (select d.* for xml raw) end,
-		case when i.{table_id} is null then null else (select i.* for xml raw) end
-		from inserted as i
-		full outer join deleted as d on i.{table_id} = d.{table_id}
+  select
+    	@operation,
+    	'{table}',
+	case when d.{table_id} is null then null else (select d.* for xml raw) end,
+	case when i.{table_id} is null then null else (select i.* for xml raw) end
+	from inserted as i
+	full outer join deleted as d on i.{table_id} = d.{table_id}
 end
