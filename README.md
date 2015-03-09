@@ -8,7 +8,7 @@ yact's twist is to store the before and after images of the change as XML conten
 
 ## The trigger
 
-The magic in the [trigger]() is to join the `inserted` and `deleted` tables and then convert the rows to XML. These tables  are supplied by the SQL server when the trigger is invoked.  Each table has the same columns as `table_name`.
+The magic in the [trigger](trigger-template.sql) is to join the `inserted` and `deleted` tables and then convert the rows to XML. These tables  are supplied by the SQL server when the trigger is invoked.  Each table has the same columns as `table_name`.
 
 ```sql
 insert into audit (table_name, old_content, new_content) 
