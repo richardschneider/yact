@@ -1,6 +1,6 @@
 # yact
 
-Yet another change tracker.  Most software systems require a `Change Tracker` component for the auditors.  This component should record the 5Ws (who, when, where, why and what) of any database change.
+Yet another change tracker for SQL tables.  Most software systems require a `Change Tracker` component for the auditors.  This component should record the 5Ws (who, when, where, why and what) of any database table change.
 
 Microsoft's SQL Server has an out of the box solution called [Change Data Capture](https://msdn.microsoft.com/en-us/library/cc645937.aspx), which is great.  However, you need an Enterprise license to enable this feature and its very expensive;  at least for us startups and open sorcerers. **yact** implements a poor man's change tracking by using [SQL triggers](http://en.wikipedia.org/wiki/Database_trigger) to insert an [audit](audit.sql) row.  
 
