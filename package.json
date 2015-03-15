@@ -1,0 +1,43 @@
+{
+  "name": "yact",
+  "version": "0.1.0",
+  "description": "Yet another change tracker for SQL. Creates an audit log that tracks all changes to a database table.",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/richardschneider/yact.git"
+  },
+  "keywords": [
+    "sql",
+    "change",
+    "tracker",
+    "audit",
+    "xml",
+    "database",
+    "table"
+  ],
+  "author": "Richard Schneider",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/richardschneider/yact/issues"
+  },
+  "homepage": "https://github.com/richardschneider/yact",
+  "devDependencies": {
+    "chai": "^2.1.1",
+    "mocha": "^2.2.1",
+    "gulp": "^3.8.8",
+    "gulp-util": "^3.0.1",
+    "gulp-bump": "^0.1.11",
+    "gulp-jscs": "^1.1.2",
+    "gulp-jshint": "^1.8.4",
+    "gulp-mocha": "^1.1.0",
+    "gulp-istanbul": "^0.5.0",
+    "should": "^4.0.4",
+    "jshint-stylish": "^0.4.0",
+    "gulp-load-plugins": "^0.6.0",
+    "gulp-plumber": "^0.6.5"
+ }
+}
