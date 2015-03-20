@@ -2,13 +2,42 @@
 
 Yet another change tracker for SQL tables.  Most software systems require a `Change Tracker` component for the auditors.  This component should record the 5Ws (who, when, where, why and what) of any database table change.
 
-Microsoft's SQL Server has an out of the box solution called [Change Data Capture](https://msdn.microsoft.com/en-us/library/cc645937.aspx), which is great.  However, you need an Enterprise license to enable this feature and its very expensive;  at least for us startups and open sorcerers. **yact** implements a poor man's change tracking by using [SQL triggers](http://en.wikipedia.org/wiki/Database_trigger) to insert an [audit](audit.sql) row.  
+Microsoft's SQL Server has an out of the box solution called [Change Data Capture](https://msdn.microsoft.com/en-us/library/cc645937.aspx), which is great.  However, you need an Enterprise license to enable this feature and its very expensive;  at least for us startups and open sorcerers. **yact** implements a poor man's change tracking by using [SQL triggers](http://en.wikipedia.org/wiki/Database_trigger) to insert an [audit](src/audit.dot) row.  
 
 yact's twist is to store the before and after images of the change as XML content as opposed to most other implementations that add a row for each field that was changed.  I believe this gives a light weight and flexible (read efficient) to change tracking.
 
+## Getting started
+
+Install with [npm](http://blog.npmjs.org/post/85484771375/how-to-install-npm)
+
+    > npm install -g yact
+
+Generate the script for the table triggers and the audit table into `yact.sql`
+
+    > yact -a Employee Payroll
+
+## Usage
+
+    > yact -help
+
+displays
+
+    Usage: yact-cl [options] [table...]
+
+    Generate the trigger script or the table(s)
+
+    Options:
+
+    -h, --help           output usage information
+    -V, --version        output the version number
+    -a, --audit          include the script to create the Audit table
+    -i, --individual     save the script(s) as individual files.
+    -o, --output [file]  save the script(s) to the specified file, the default is "yact.sql"
+
+
 ## The trigger
 
-The magic in the [trigger](trigger-template.sql) is to join the `inserted` and `deleted` tables and then convert the rows to XML. These tables  are supplied by the SQL server when the trigger is invoked.  Each table has the same columns as `table_name`.
+The magic in the [trigger](src/trigger.dot) is to join the `inserted` and `deleted` tables and then convert the rows to XML. These tables  are supplied by the SQL server when the trigger is invoked.  Each table has the same columns as `table_name`.
 
 ```sql
 insert into audit (table_name, old_content, new_content) 
@@ -30,7 +59,7 @@ Triggers that insert (as yact does) change the `@@identity` value.  All stored p
 
 ## audit table
 
-All changes (`insert`, `update` or `delete`) to a yact monitored table are stored in the [audit table](audit.sql).
+All changes (`insert`, `update` or `delete`) to a yact monitored table are stored in the [audit table](src/audit.dot).
 
 | Column | Description |
 | ------ | ----------- |
@@ -39,9 +68,9 @@ All changes (`insert`, `update` or `delete`) to a yact monitored table are store
 | table_name | **What** information was changed. | 
 | old_content | **What** was the old information. | 
 | new_content | **What** is the new information. | 
-| who | **Who** changed this information | 
-| when | **When** was the information changed |  
-| where | **Where** was the change performed from. *Not yet implemented.* | 
+| who | **Who** changed this information. | 
+| when | **When** was the information changed. |  
+| where | **Where** was the change performed from (IP address of the SQL client). | 
 | why | **Why** was this change performed.  *Not yet implemented.* |
 
 ### Who are you

@@ -24,4 +24,12 @@ describe('trigger script', function() {
     yact.script(config).should.contain('xid');
   });
 
+});
+
+describe('audit script', function() {
+  it('creates the SQL for the Audit table', function() {
+    yact.auditScript().should.contain('audit');
   });
+
+});
+ 

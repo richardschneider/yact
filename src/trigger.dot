@@ -1,0 +1,14 @@
+create trigger [trg_{{=it.table}}]
+on {{=it.table}} for insert, update, delete not for replication
+as
+begin
+	set NOCOUNT on
+
+    insert into audit (table_name, old_content, new_content)
+    select
+    	'{{=it.table}}',
+	    case when d.{{=it.primaryKey}} is null then null else (select d.* for xml raw) end,
+	    case when i.{{=it.primaryKey}} is null then null else (select i.* for xml raw) end
+	    from inserted as i
+	    full outer join deleted as d on i.{{=it.primaryKey}} = d.{{=it.primaryKey}}
+end
