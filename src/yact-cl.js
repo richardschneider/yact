@@ -14,7 +14,7 @@ var fs = require('fs');
 var yact = require('./yact');
 
 program
-  .version('0.1.0')
+  .version(require('../package.json').version)
   .usage('[options] [table[:key]...]')
   .description('Generate the audit trigger script for the table(s)')
   .option('-a, --audit', 'include the script to create the Audit table')
