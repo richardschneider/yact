@@ -1,6 +1,6 @@
 {
   "name": "yact",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Yet another change tracker for SQL. Creates an audit log that tracks all changes to a database table.",
   "main": "index.js",
   "scripts": {

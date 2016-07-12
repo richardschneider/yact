@@ -20,13 +20,12 @@ Generate the script for the table triggers and the audit table into `yact.sql`
 
     > yact -help
 
-displays
+ ````
+ Usage: yact-cl [options] [table[:key]...]
 
-    Usage: yact-cl [options] [table...]
+  Generate the audit trigger script for the table(s)
 
-    Generate the trigger script or the table(s)
-
-    Options:
+  Options:
 
     -h, --help           output usage information
     -V, --version        output the version number
@@ -34,7 +33,15 @@ displays
     -i, --individual     save the script(s) as individual files.
     -o, --output [file]  save the script(s) to the specified file, the default is "yact.sql"
 
+  Examples:
 
+    # create trigger script for contact table, primary key is contact_id
+    yact contact
+
+    # create trigger script for contact table, primary key is id
+    yact contact:id
+ ````
+ 
 ## The trigger
 
 The magic in the [trigger](src/trigger.dot) is to join the `inserted` and `deleted` tables and then convert the rows to XML. These tables  are supplied by the SQL server when the trigger is invoked.  Each table has the same columns as `table_name`.
@@ -66,8 +73,8 @@ All changes (`insert`, `update` or `delete`) to a yact monitored table are store
 | audit_id | A unique key for this audit entry.  Keeps an [ORM](http://en.wikipedia.org/wiki/Object-relational_mapping) happy. |
 | operation | The SQL operation (`insert`, `update` or `delete`) performed on the *table_name*. |
 | table_name | **What** information was changed. | 
-| old_content | **What** was the old information. | 
-| new_content | **What** is the new information. | 
+| old_content | **What** was the old information; formatted as XML. Each column of the row is an XML attribute. | 
+| new_content | **What** is the new information; foratted as XML. Each column of the row is an XML attribute. | 
 | who | **Who** changed this information. | 
 | when | **When** was the information changed. |  
 | where | **Where** was the change performed from (IP address of the SQL client). | 
