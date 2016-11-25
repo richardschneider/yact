@@ -26,19 +26,19 @@
   },
   "homepage": "https://github.com/richardschneider/yact",
   "devDependencies": {
-    "chai": "^2.1.1",
-    "mocha": "^2.2.1",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
     "gulp": "^3.8.8",
     "gulp-util": "^3.0.1",
-    "gulp-bump": "^0.1.11",
-    "gulp-jscs": "^1.1.2",
-    "gulp-jshint": "^1.8.4",
-    "gulp-mocha": "^1.1.0",
-    "gulp-istanbul": "^0.5.0",
-    "should": "^4.0.4",
-    "jshint-stylish": "^0.4.0",
-    "gulp-load-plugins": "^0.6.0",
-    "gulp-plumber": "^0.6.5"
+    "gulp-bump": "^2.5.1",
+    "gulp-jscs": "^4.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-mocha": "^3.0.1",
+    "gulp-istanbul": "^1.1.1",
+    "should": "^11.1.1",
+    "jshint-stylish": "^2.2.1",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-plumber": "^1.1.0"
   },
   "bin": {
     "yact": "src/yact-cl.js"
