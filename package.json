@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/richardschneider/yact",
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.1.0",
     "mocha": "^3.2.0",
     "gulp": "^3.8.8",
     "gulp-util": "^3.0.1",
