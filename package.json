@@ -30,7 +30,7 @@
     "mocha": "^3.2.0",
     "gulp": "^3.8.8",
     "gulp-util": "^3.0.1",
-    "gulp-bump": "^2.5.1",
+    "gulp-bump": "^3.1.1",
     "gulp-jscs": "^4.0.0",
     "gulp-jshint": "^2.0.4",
     "gulp-mocha": "^3.0.1",
