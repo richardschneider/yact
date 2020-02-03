@@ -45,7 +45,7 @@
   },
   
   "dependencies": {
-    "commander": "^2.7.1",
+    "commander": "^4.1.1",
     "dot": "^1.0.3"
   }
 }
